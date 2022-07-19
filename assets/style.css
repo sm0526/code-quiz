@@ -1,0 +1,40 @@
+* {
+    box-sizing: border-box;
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    padding: 0%;
+    margin: 0%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: darkblue;
+    color: turquoise;
+    text-align: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.q-container {
+    width: 750px;
+    max-width: 80%;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 0 10px 2px;
+    display: flex;
+    background-color: rgb(127, 34, 34);
+    color:aliceblue
+}
+
+.btn-grid {
+    display: grid;
+    grid-template-columns: repeat(2,auto);
+    margin: 10px;
+    gap: 10px;
+}
+
+.btn {
+    background-color: paleturquoise;
+    color: black;
+}
