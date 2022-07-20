@@ -43,5 +43,60 @@ var questions = [
             d: "The footer"
         },
         correctAnswer: 'c'
-    }
+    },
+    {
+        question: "How would the id=\'smile\' be displayed in CSS?",
+        answers: {
+            a: "id=\'smile\'",
+            b: "smile",
+            c: ".smile",
+            d: "#smile"
+        },
+        correctAnswer: 'd'
+    },
+    {
+        question: "Which way is the correct way to do comments in HTML?",
+        answers: {
+            a: "//",
+            b: "/* */",
+            c: "<!-- -->",
+            d: "comment:"
+        },
+        correctAnswer: 'c'
+    },
+    {
+        question: "Which are the three data types in Javascript?",
+        answers: {
+            a: "bolean, string, and number",
+            b: "==, &&, and ||",
+            c: "id, class, and element",
+            d: "mode, mean, and median"
+        },
+        correctAnswer: 'a'
+    },
 ]
+//timer, need to figure out how to deduct time for wrong answers
+var count = 15;
+var timer = setInterval(function() {
+  console.log(count);
+  count--;
+  if(count === 0) {
+    stopInterval()
+  }
+}, 1000);
+
+var stopInterval = function() {
+  alert('time is up!');
+  clearInterval(timer);
+}
+//trying to figure out how to make the quiz using the questions used
+function buildQuiz(){
+  const output= [];
+  questions.forEach((currentQuestion, questionNumber) => {
+    const answers = []
+  })
+}
+//to show the correct answers
+function showResults(){
+
+}
