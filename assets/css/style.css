@@ -38,3 +38,7 @@
     background-color: paleturquoise;
     color: black;
 }
+
+.hide {
+    display: none;
+}
