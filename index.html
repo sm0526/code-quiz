@@ -8,7 +8,13 @@
     <link href="./assets/style.css" rel="Stylesheet">
 </head>
 <body>
+    <div id="timer">Time: <span id="timeframe">0</span></div>
     <main class="container">
+        <section id="startscreen">
+            <h1>Coding Quiz</h1>
+            <p>This is to test your knowledge on coding. Answer the questions within the time limit, but be warned incorrect answers will drop time off the time clock</p>
+            <button id="start-button">Start Quiz</button>
+        </section>
         <section id="q-container" class="hide">
             <section id="question"><h1>Questions</h1></section>
             <section id="answer-btns" class="btn-grid">
@@ -23,6 +29,7 @@
             </section>
         </section>
     </main>
-    <script src='./assets/script.js'></script>
+    <div class="scoreboard"><a href="./assets/html/scores.html">See Highscore List</a></div>
+    <script src='./assets/js/questions.js'></script>
 </body>
 </html>
