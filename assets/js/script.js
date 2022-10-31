@@ -112,20 +112,20 @@ function clockTick() {
 //trying to figure out how to make the quiz using the questions used
 function buildQuiz() {
     //hides the opening screen
-   var startScreenEl = document.getElementById('startscreen');
-   startScreenEl.setAttribute('class', 'hide');
-   //reveal the questions container
-   questionsEl.removeAttribute('class');
-   //start timer and show the starting time
-   timerId = setInterval(clockTick, 1050);
-   timerEl.textContent = timer;
-   //call function for questions
-   displayQuestion();
+    var startScreenEl = document.getElementById('startscreen');
+    startScreenEl.setAttribute('class', 'hide');
+    //reveal the questions container
+    questionsEl.removeAttribute('class');
+    //start timer and show the starting time
+    timerId = setInterval(clockTick, 1050);
+    timerEl.textContent = timer;
+    //call function for questions
+    displayQuestion();
 }
 
 function displayQuestion() {
     //get a question from the array
-    var currentQuestion = questions [currentQuestionIndex];
+    var currentQuestion = questions[currentQuestionIndex];
     //update question to display new question
     var questionEl = document.getElementById('question');
     questionEl.textContent = currentQuestion.question;
@@ -144,32 +144,32 @@ function displayQuestion() {
 
 //to show the answers
 function showOptions(event) {
-  var buttonEl = event.target;
-  if (!buttonEl.matches('.answer')) {
-    return;
-  }
-  if (buttonEl.value !== questions[currentQuestionIndex].correctAnswer){
-    timer -= 10;
-    if (timer < 0) {
-        timer = 0;
+    var buttonEl = event.target;
+    if (!buttonEl.matches('.answer')) {
+        return;
     }
-    timerEl.textContent = timer;
-    feedbackEl.textContent = 'Incorrect!';
-  } else {
-    feedbackEl.textContent = 'You are Correct!';
-  } 
-  feedbackEl.setAttribute('class', 'feedback');
-  timeOut(function () {
-    feedbackEl.setAttribute('class', 'feedback hide');
-  }, 1050);
+    if (buttonEl.value !== questions[currentQuestionIndex].correctAnswer) {
+        timer -= 10;
+        if (timer < 0) {
+            timer = 0;
+        }
+        timerEl.textContent = timer;
+        feedbackEl.textContent = 'Incorrect!';
+    } else {
+        feedbackEl.textContent = 'You are Correct!';
+    }
+    feedbackEl.setAttribute('class', 'feedback');
+    timeOut(function () {
+        feedbackEl.setAttribute('class', 'feedback hide');
+    }, 1050);
 
-  currentQuestionIndex++;
+    currentQuestionIndex++;
 
-  if (time <= 0 || currentQuestionIndex === questions.length) {
-    quizEnd();
-  } else {
-    displayQuestion();
-  }
+    if (time <= 0 || currentQuestionIndex === questions.length) {
+        quizEnd();
+    } else {
+        displayQuestion();
+    }
 }
 
 //function for ending the quiz
@@ -180,6 +180,25 @@ function quizEnd() {
     var finalScoreEl = document.getElementById('final-score');
     finalScoreEl.textContent = timer;
     questionsEl.setAttribute('class', 'hide');
+}
+
+function saveHighscore() {
+    var initials = initialsEl.value.trim();
+    if (initials !== '') {
+        var highscore =
+            JSON.parse(window.localStorage.getItem('highscore')) || [];
+        var currentScore = {
+            score: timer,
+            initials: initials,
+        };
+        highscore.push(currentScore);
+        window.localStorage.setItem('highscore', JSON.stringify(highscore));
+        window.location.href = 'scores.html';
+    }
+}
+
+function checkForEnter(event) {
+
 }
 
 startBtn.onclick = buildQuiz
