@@ -1,7 +1,4 @@
 //need funtions to generate quiz, show the questions/answers, show the results
-
-const { TimeoutError } = require("sequelize");
-
 //need to set up a timer that starts when quiz starts. need to deduct time when question incorrect.
 //variables for timer
 var currentQuestionIndex = 0;
@@ -11,8 +8,10 @@ var timerId;
 //variables for DOM els
 var timerEl = document.getElementById('timer');
 var startBtn = document.getElementById('start-button');
+var submitBtn = document.getElementById('submit')
 var questionsEl = document.getElementById('questions');
 var answersEl = document.getElementById('answers');
+var initialsEl = document.getElementById('initials');
 
 //questions&answers
 var questions = [
@@ -198,7 +197,12 @@ function saveHighscore() {
 }
 
 function checkForEnter(event) {
-
+    if (event.key === 'Enter') {
+        saveHighscore();
+    }
 }
 
-startBtn.onclick = buildQuiz
+startBtn.onclick = buildQuiz;
+answersEl.onclick = showOptions;
+submitBtn.onclick = saveHighscore;
+initialsEl.onkeyup = checkForEnter;
