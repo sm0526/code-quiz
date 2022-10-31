@@ -2,14 +2,13 @@
 //need to set up a timer that starts when quiz starts. need to deduct time when question incorrect.
 //variables for timer
 var currentQuestionIndex = 0;
-var timerLength = questions.length * 20;
 var timerId;
 
 //variables for DOM els
 var timerEl = document.getElementById('timer');
 var startBtn = document.getElementById('start-button');
 var submitBtn = document.getElementById('submit')
-var questionsEl = document.getElementById('questions');
+var questionsEl = document.getElementById('q-container');
 var answersEl = document.getElementById('answers');
 var initialsEl = document.getElementById('initials');
 
@@ -87,14 +86,9 @@ var questions = [
     },
 ]
 //timer, need to figure out how to deduct time for wrong answers
+var timer = questions.length * 15;
 var count = 15;
-var timer = setInterval(function () {
-    console.log(count);
-    count--;
-    if (count === 0) {
-        stopInterval()
-    }
-}, 1000);
+
 
 var stopInterval = function () {
     alert('time is up!');
@@ -164,7 +158,7 @@ function showOptions(event) {
 
     currentQuestionIndex++;
 
-    if (time <= 0 || currentQuestionIndex === questions.length) {
+    if (timer <= 0 || currentQuestionIndex === questions.length) {
         quizEnd();
     } else {
         displayQuestion();

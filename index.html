@@ -10,7 +10,7 @@
 <body>
     <div id="timer">Time: <span id="timeframe">0</span></div>
     <main class="container">
-        <section id="startscreen">
+        <section id="startscreen" class="start">
             <h1>Coding Quiz</h1>
             <p>This is to test your knowledge on coding. Answer the questions within the time limit, but be warned incorrect answers will drop time off the time clock</p>
             <button id="start-button">Start Quiz</button>
@@ -21,11 +21,19 @@
             </section>
             <section class="control-buttons">
                 <button id="start-btn" class="btn start-btn">Start</button>
-                <button id="next-btn" class="btn hide next-btn">Next</button>
             </section>
         </section>
+        <section id="end-screen" class="hide">
+            <h2>You have Completed the Quiz</h2>
+            <p>Your score is <span id="final-score"></span>.</p>
+            <br>
+            <p>
+                Enter your Initials: <input type="text" id="initials" max="3"/>
+                <button id="submit">Submit</button>
+            </p>
+        </section>
     </main>
-    <div class="scoreboard"><a href="./assets/html/scores.html">See Highscore List</a></div>
+    <div class="scores"><a href="./assets/html/scores.html">See Highscore List</a></div>
     <script src='./assets/js/script.js'></script>
 </body>
 </html>
