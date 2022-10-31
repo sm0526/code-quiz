@@ -1,5 +1,7 @@
 //need funtions to generate quiz, show the questions/answers, show the results
 
+const { TimeoutError } = require("sequelize");
+
 //need to set up a timer that starts when quiz starts. need to deduct time when question incorrect.
 //variables for timer
 var currentQuestionIndex = 0;
@@ -99,14 +101,85 @@ var stopInterval = function () {
     alert('time is up!');
     clearInterval(timer);
 }
+
+function clockTick() {
+    timer--;
+    timerEl.textContent = timer;
+    if (timer <= 0) {
+        quizEnd();
+    }
+}
 //trying to figure out how to make the quiz using the questions used
 function buildQuiz() {
-    const output = [];
-    questions.forEach((currentQuestion, questionNumber) => {
-        const answers = []
-    })
+    //hides the opening screen
+   var startScreenEl = document.getElementById('startscreen');
+   startScreenEl.setAttribute('class', 'hide');
+   //reveal the questions container
+   questionsEl.removeAttribute('class');
+   //start timer and show the starting time
+   timerId = setInterval(clockTick, 1050);
+   timerEl.textContent = timer;
+   //call function for questions
+   displayQuestion();
 }
-//to show the correct answers
-function showResults() {
 
+function displayQuestion() {
+    //get a question from the array
+    var currentQuestion = questions [currentQuestionIndex];
+    //update question to display new question
+    var questionEl = document.getElementById('question');
+    questionEl.textContent = currentQuestion.question;
+    //remove previous answer choices
+    answersEl.innerHTML = '';
+    //loop for answers
+    for (let i = 0; i < currentQuestion.answers.length; i++) {
+        var answer = currentQuestion.answers[i];
+        var answerNode = document.createElement('button');
+        answerNode.setAttribute('class', 'answers');
+        answerNode.setAttribute('value', answer);
+        answerNode.textContent = i + 1 + '. ' + answer;
+        answersEl.appendChild(answerNode);
+    }
 }
+
+//to show the answers
+function showOptions(event) {
+  var buttonEl = event.target;
+  if (!buttonEl.matches('.answer')) {
+    return;
+  }
+  if (buttonEl.value !== questions[currentQuestionIndex].correctAnswer){
+    timer -= 10;
+    if (timer < 0) {
+        timer = 0;
+    }
+    timerEl.textContent = timer;
+    feedbackEl.textContent = 'Incorrect!';
+  } else {
+    feedbackEl.textContent = 'You are Correct!';
+  } 
+  feedbackEl.setAttribute('class', 'feedback');
+  timeOut(function () {
+    feedbackEl.setAttribute('class', 'feedback hide');
+  }, 1050);
+
+  currentQuestionIndex++;
+
+  if (time <= 0 || currentQuestionIndex === questions.length) {
+    quizEnd();
+  } else {
+    displayQuestion();
+  }
+}
+
+//function for ending the quiz
+function quizEnd() {
+    clearInterval(timerId);
+    var endScreenEl = document.getElementById('end-screen');
+    endScreenEl.removeAttribute('class');
+    var finalScoreEl = document.getElementById('final-score');
+    finalScoreEl.textContent = timer;
+    questionsEl.setAttribute('class', 'hide');
+}
+
+startBtn.onclick = buildQuiz
