@@ -107,6 +107,7 @@ function buildQuiz() {
     //hides the opening screen
     var startScreenEl = document.getElementById('startscreen');
     startScreenEl.setAttribute('class', 'hide');
+    startBtn.setAttribute('class', 'hide');
     //reveal the questions container
     questionsEl.removeAttribute('class');
     //start timer and show the starting time
@@ -142,7 +143,7 @@ function showOptions(event) {
         return;
     }
     if (buttonEl.value !== questions[currentQuestionIndex].correctAnswer) {
-        timer -= 10;
+        timer - 10;
         if (timer < 0) {
             timer = 0;
         }
